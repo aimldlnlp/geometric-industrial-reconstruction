@@ -1,0 +1,82 @@
+seed: 7
+
+dataset:
+  root: data/industrial_scan_benchmark
+  families:
+    - flange
+    - shaft
+    - bracket
+    - pipe_elbow
+    - plate_with_holes
+  parts_per_family: 4
+  scans_per_part: 2
+  split_ratios:
+    train: 0.6
+    val: 0.2
+    test: 0.2
+  reference_points: 12000
+  scan_points: 9000
+  views_per_scan:
+    min: 2
+    max: 4
+  visibility_cosine: 0.12
+  occlusion_dropout:
+    min: 0.05
+    max: 0.14
+  noise_std_range_mm:
+    min: 0.15
+    max: 0.55
+  outlier_ratio_range:
+    min: 0.01
+    max: 0.025
+  pose_rotation_deg: 28.0
+  pose_translation_m: 0.035
+  view_jitter_deg: 1.0
+  view_jitter_mm: 0.5
+
+pipeline:
+  voxel_size_m: 0.0025
+  outlier_nb_points: 24
+  outlier_radius_m: 0.01
+  normal_radius_m: 0.008
+  fpfh_radius_m: 0.016
+  global_distance_m: 0.022
+  icp_distance_m: 0.009
+  icp_schedule_m:
+    - 0.008
+    - 0.005
+    - 0.003
+  primitive_threshold_m: 0.0025
+  primitive_iterations: 144
+  primitive_min_inliers: 120
+  max_planes: 2
+  max_cylinders: 2
+  max_spheres: 1
+  success_rot_deg: 2.0
+  success_trans_mm: 3.0
+  coverage_tol_mm: 2.5
+  refine_min_rel_improvement: 0.02
+  refine_min_abs_improvement_mm: 0.10
+  refine_max_coverage_drop: 0.01
+  refine_max_delta_deg: 12.0
+  refine_max_delta_mm: 8.0
+  refine_strong_gain_rel: 0.10
+  plate_snap_max_candidates: 16
+  pipe_elbow_angle_search_deg: 3.0
+  pipe_elbow_angle_step_deg: 1.0
+  reconstruction_alpha_scale: 1.8
+
+artifacts:
+  run_root: artifacts/runs
+
+figures:
+  root: artifacts/figures
+  dpi: 220
+
+videos:
+  root: artifacts/videos
+  fps: 18
+  frames_per_scene: 64
+  size:
+    width: 1280
+    height: 720
